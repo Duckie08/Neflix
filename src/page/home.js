@@ -16,8 +16,8 @@ export default function Home() {
                 <Feature.SubTitle>
                     Watch anywhere. Cancel at any time.
                 </Feature.SubTitle>
-            </Feature>
-        <OtpForm>
+
+                <OtpForm>
                 <OtpForm.Input placeholder="Email address" />
                 <OtpForm.Button>Try it now</OtpForm.Button>
                 <OtpForm.Break />
@@ -25,6 +25,8 @@ export default function Home() {
                     Ready to watch  Enter your email to create or restart your membership
                 </OtpForm.Text>
             </OtpForm>
+            </Feature>
+     
 
         </HeaderContainer>
             <JumbotronContainer />
