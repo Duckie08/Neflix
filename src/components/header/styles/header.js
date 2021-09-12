@@ -71,30 +71,51 @@ export const Dropdown = styled.div`
   width: 100px;
   top: 32px;
   right: 10px;
-
-  ${Group}:last-of-type $(Link) {
-      cursor: pointer;
+  ${Group}:last-of-type ${Link} {
+    cursor: pointer;
   }
-
   ${Group} {
-      margin-bottom: 10px;
-
-      &:last-of-type {
-          margin-bottom: 0;
-      }
-      ${Link}, ${Picture} {
-          cursor: default;
-      }
-  }
-
-  button {
-      margin-right: 10px;
-  }
-
-  p {
-      font-size: 12px;
+    margin-bottom: 10px;
+    &:last-of-type {
       margin-bottom: 0;
+    }
+    ${Link} {
+      cursor: pointer;
+    }
+    ${Picture} {
+      cursor: default;
+    }
   }
+  button {
+    margin-right: 10px;
+  }
+  p {
+    font-size: 12px;
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+`;
+
+export const PlayButton = styled.button`
+  box-shadow: 0 0.6vw 1vw -0.4vw rgba(0,0,0,0.35);
+  background-color: #e6e6e6;
+  color: #000;
+  font-weight: bold;
+  border-width: 0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  max-width: 130px;
+  font-size: 20px;
+  margin-topp: 30px;
+  cursor: pointer;
+  transition: background-color: 1 ease;
+
+  &:hover {
+    background-color: #ff1e1e;
+    color: white;
+
+  }
+
 `;
 export const Search = styled.div`
   display: flex;
@@ -136,20 +157,19 @@ export const SearchInput = styled.input`
 `;
 
 export const Profile = styled.div`
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  position: relative;
+  button {
+    cursor: pointer;
+  }
+  &:hover > ${Dropdown} {
     display: flex;
-    align-items: center;
-    margin-left: 20px;
-    position: relative;
-
-    button {
-        cursor: pointer;
-    }
-
-    &:hover > ${Dropdown} {
-        display: flex;
-        flex-direction: column;
-    }
+    flex-direction: column;
+  }
 `;
+
 
 export const Logo = styled.img`
     height: 32px;

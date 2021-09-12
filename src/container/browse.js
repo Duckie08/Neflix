@@ -35,25 +35,27 @@ export function BrowseContainer({ slides }) {
                 </Header.Group>
                 <Header.Group>
                     <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-                </Header.Group>
-                <Header.Profile>
-                    <Header.Picture src={user.photoURL}></Header.Picture>
-                    <Header.Dropdown>
-                        <Header.Group>
+                    <Header.Profile>
                         <Header.Picture src={user.photoURL} />
-                        <Header.TextLink>{user.displayName}</Header.TextLink>
-                        </Header.Group>
-                        <Header.Group>
-                            <Header.TextLink onClick={() => firebase.auth().signOut()}>Sign out</Header.TextLink>
-                        </Header.Group>
-                    </Header.Dropdown>
-                </Header.Profile>
+                        <Header.Dropdown>
+                            <Header.Group>
+                                <Header.Picture src={user.photoURL} />
+                                <Header.TextLink>{user.displayName}</Header.TextLink>
+                                </Header.Group>
+                                <Header.Group>
+                                <Header.TextLink onClick={() => firebase.auth().signOut()}>Sign out</Header.TextLink>
+                            </Header.Group>
+                        </Header.Dropdown>
+                    </Header.Profile>
+                    </Header.Group>
             </Header.Frame>
+            
             <Header.Feature>
                 <Header.FeatureCallOut>Watch Joker Now</Header.FeatureCallOut>
                 <Header.Text>
                     Forever alone in a crowd, failded comedian Athur Fleck seeks connection as he walks the streets of Gotham City. Athur wears two masks -- the one he paints for his day job as a clown, and the guise he projects in a futile attemp to feel like he's part of the world around him.
                 </Header.Text>
+                <Header.PlayButton>Play</Header.PlayButton>
             </Header.Feature>
         </Header>
         </>
