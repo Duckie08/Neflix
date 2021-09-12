@@ -1,27 +1,32 @@
 import React, { useContext, useState, useEffect } from "react";
 import { SelectProfileContainer } from "./profiles";
 import { FirebaseContext } from "../context/firebase";
-import { Header, Loading } from "../components";
+import { Header, Loading, Card } from "../components";
 import * as ROUTES from '../constants/router';
 import logo from '../logo.svg';
 
 export function BrowseContainer({ slides }) {
+    const [category, setCategory] = useState('series');
     const [searchTerm, setSearchTerm] = useState('');
     const [profile, setProfile] = useState({});
     const [loading, setLoading] = useState(true);
     const { firebase } = useContext(FirebaseContext);
-    
+    const [slideRows, setSlideRows] = useState([]);
     const user = firebase.auth().currentUser || {};
 
+    console.log(slides[category])
+
     useEffect(() => {
-        console.log("profile", profile)
         setTimeout(() => {
           setLoading(false);
         }, 3000);
       }, [profile.displayName]);
     
-
     
+      useEffect(() => {
+         setSlideRows(slides[category])
+      }, [slides, category]);
+
     return profile.displayName ? (
         <>
         {loading ? <Loading src={user.photoURL} /> : <Loading.ReleaseBody />}
@@ -30,8 +35,18 @@ export function BrowseContainer({ slides }) {
             <Header.Frame>
                 <Header.Group>
                     <Header.Logo to={ROUTES.HOME} src={logo} alt="NetFlix" />
-                    <Header.TextLink>Series</Header.TextLink>
-                    <Header.TextLink>Films</Header.TextLink>
+                    <Header.TextLink 
+                        active={category === 'series' ? 'true' : false } 
+                        onClick={() => setCategory('series')}
+                        >
+                            Series
+                        </Header.TextLink>
+                    <Header.TextLink
+                           active={category === 'films' ? 'true' : false } 
+                           onClick={() => setCategory('films')}
+                    >
+                        Films
+                    </Header.TextLink>
                 </Header.Group>
                 <Header.Group>
                     <Header.Search searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
@@ -58,6 +73,24 @@ export function BrowseContainer({ slides }) {
                 <Header.PlayButton>Play</Header.PlayButton>
             </Header.Feature>
         </Header>
+
+        <Card.Group>
+            
+            {slideRows.map((slideItem) => {
+                <Card key={`${category}-${slideItem.title.toLowerCase()}`}>
+                    <Card.Title>{slideItem.title}</Card.Title>
+                    <Card.Entities>
+                        {slideItem.data.map((item) => {
+                            <Card.Item key={item.docId} item={item}>
+                                <Card.Image src={`/images/${category}/${item.genre}/${item.slug}/small.jpg`}
+                            />
+                            </Card.Item>
+                        })}
+                    </Card.Entities>
+                </Card>
+            })}
+
+        </Card.Group>
         </>
     ) : (
         <SelectProfileContainer user={user} setProfile={setProfile} />
